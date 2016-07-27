@@ -1,0 +1,191 @@
+<html>
+	<head>
+		<title>
+			Excercise 1
+		</title>
+		<script src='jq.js'></script>
+	</head>
+<style>
+.node{
+	position:relative;
+	display: none;
+}
+.siblings{
+	display:inline;
+}
+.children1, .children2{
+	position:absolute;
+}
+.children2{
+	left:100%;
+	top:0;
+	display:none;
+}
+.node_name,.add_sibling1{
+	display:inline-block;
+}
+.add_sibling1{
+	float:right;
+}
+.add_child1{
+	display:block;
+}
+.add_sibling2{
+	display: block;
+	margin-right:50px;
+}
+.add_child2{
+	display:inline-block;
+}
+.sibling{
+	float:left;
+	position:relative;
+}
+.sibling2{
+	display:block;
+	position:relative;
+}
+.child{
+	display:inline-block;
+}
+.sibling:hover .node{
+	display:block;
+}
+.sibling2:hover > .node_name:hover + .node > .children2, .sibling2:hover > .node:hover > .children2  {
+	display: block;
+}
+</style>
+	<script>
+		$(document).ready(function(){
+			var new_top_sibling = function(parent_element,name){
+				var code = `
+				<div class='sibling'>	
+					<input type='button' value='`+name+`' class='node_name'>
+						<div class='node'>
+							<input type='button' value='Add Sibling'  class='add_sibling1'>
+							<input type='button' value='Add Child'  class='add_child1'>
+							<div  class='children1'></div>
+						</div>
+				</div>`;
+				$($(parent_element).parent().parent()).append(code);
+			};
+
+			var new_bottom_sibling = function(parent_element,name){
+				var code = `
+				<div class='sibling2'>
+					<input type='button' value='`+name+`'  class='node_name'>
+					<div  class='node'>
+						<input type='button' value='Add Child'  class='add_child2'>
+						<input type='button' value='Add Sibling'  class='add_sibling2'>
+						<div  class='children2'></div>
+					</div>`;
+				$($(parent_element).parent()).append(code);
+			};
+
+			var new_top_child = function(parent_element,name){
+				var code = `
+				<div class='sibling2'>
+					<input type='button' value='`+name+`'  class='node_name'>
+					<div  class='node'>
+						<input type='button' value='Add Child'  class='add_child2'>
+						<input type='button' value='Add Sibling'  class='add_sibling2'>
+						<div  class='children2'></div>
+					</div>
+				</div>`;
+				$(parent_element).find('.children1').append(code);
+			};
+
+			var new_bottom_child = function(parent_element,name){
+				var code = `
+				<div class='sibling2'>
+					<input type='button' value='`+name+`'  class='node_name'>
+					<div  class='node'>
+						<input type='button' value='Add Child'  class='add_child2'>
+						<input type='button' value='Add Sibling'  class='add_sibling2'>
+						<div  class='children2'></div>
+					</div>
+				</div>`;
+				$(parent_element).find('.children2').first().append(code);
+			};
+
+			$(document).on('click','.add_sibling1',function(){
+				var text = '';
+				while(text == '')
+				{
+					text = prompt('Enter the name of the new sibling node : ','');
+				}
+				if (text != null)
+				{
+					new_top_sibling($(this).parent(),text);
+				}
+			});
+			$(document).on('click','.add_sibling2',function(){
+				var text = '';
+				while(text == '')
+				{
+					text = prompt('Enter the name of the new sibling node : ','');
+				}
+				if (text != null)
+				{
+					new_bottom_sibling($(this).parent(),text);
+				}
+			});
+			$(document).on('click','.add_child1',function(){
+				var text = '';
+				while(text == '')
+				{
+					text = prompt('Enter the name of the new child node : ','');
+				}
+				if (text != null)
+				{
+					new_top_child($(this).parent(),text);
+				}
+			});
+			$(document).on('click','.add_child2',function(){
+				var text = '';
+				while(text == '')
+				{
+					text = prompt('Enter the name of the new child node : ','');
+				}
+				if (text != null)
+				{
+					new_bottom_child($(this).parent(),text);
+				}
+			});
+			$(document).on('mouseenter','.noe_name',function(){
+				$(this).siblings().each(function(){
+					$(this).css('visibility','visible');
+					/*
+					if ($(this).attr('class') == 'children1')
+					{
+						console.log($(this).children('.node_name'));
+						$(this).filter('.siblings').children().first().css('visibility','visible');
+					}
+					*/
+					//$(this).find('.node_name').each(function(){
+					//	$(this).css('visibility','visible');
+					//});
+				});
+			});
+			$(document).on('mouseleave','.nde_name',function(){
+				$(this).siblings().each(function(){
+					$(this).css('visibility','hidden');
+				});
+			});
+		});
+	</script>
+	<body>
+		<div id='main'>
+			<div class='siblings'>
+				<div class='sibling'>
+					<input type='button' value='AAAAAA' class='node_name'>
+					<div  class='node'>
+						<input type='button' value='Add Sibling'  class='add_sibling1'>
+						<input type='button' value='Add Child'  class='add_child1'>
+						<div  class='children1'></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
