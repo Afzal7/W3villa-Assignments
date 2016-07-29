@@ -8,6 +8,7 @@ body{
 	justify-content: space-between;
 	position:fixed;
 	box-shadow:0px 0px 5px grey;
+	z-index:10;
 }
 .panel_items{
 	padding:10px 15px 10px 15px;
@@ -152,14 +153,14 @@ body{
 	width:auto;
 }
 #portfolio{
-	padding:0%;
+	padding:1% 0 0 0;
 	display:block;
 }
 #portfolio .top_panel{
 	margin:10%;
 	position:relative;
 	box-shadow: none;
-	/width:100%;
+	z-index:0;
 }
 .products_container{
 	width: 100%;
@@ -265,5 +266,126 @@ body{
 	width:100%;
 	height:10%;
 	text-align:center;
+	color:#333333;
+}
+#designation{
+	color:#dddddd;
+}
+#plans_container{
+	background:#eeeeee;
+	display:block;
+}
+#plans{
+	padding:10% 0;
+}
+.plan{
+	background: white;
+	width:25%;
+	padding:2%;
+}
+.plan:hover{
+	box-shadow: 0px 0px 20px #cccccc;
+	transition:500ms;
+}
+.plan_name{
+
+}
+.plan_value_container{
+	width:96%;
+	text-align:center;
+	margin:10% 0;
+	font-family:Arial;
+}
+.sup{
+	font-size: 2em;
+    display: inline;
+    margin-top:-100%;
+}
+.plan_value{
+	display:inline;
+}
+.value_number{
+	font-size:5em;
+}
+.permonth{
+	font-size:20px;
 	color:#999999;
+}
+.specs_container,.choose_plan{
+	text-align:center;
+	color:#999999;
+	padding:5%;
+}
+.specs{
+	margin:10% 0;
+}
+.choose_plan{
+	color:#333333;
+	cursor:pointer;
+}
+#contactus{
+	padding : 0%;
+}
+#contactus .left_container{
+	padding:12% 12% 0 12%;
+}
+.contact_form{
+	margin:20% 0;
+}
+input[type='text'],textarea{
+	width:100%;
+	border:3px solid transparent;
+	border-bottom-color:black;
+	border-radius:4px;
+	padding:15px;
+	margin:2% 0;
+	font-size:15px;
+}
+textarea{
+	height: 200px;
+	color:#cccccc;
+}
+input:focus,textarea:focus{
+	outline:none;
+	color:black;
+	border-bottom-color:gold;
+}
+input[type='submit']{
+	padding:10px 100px;
+	background: black;
+	color:white;
+	border:0;
+	cursor:pointer;
+}
+input[type='submit']:hover{
+	background: gold;
+}
+.map{
+	background: url('map.jpg') no-repeat 0 0;
+	background-size:auto 100%;
+}
+.footer{
+	display: block;
+	text-align: center;
+	background: #333333;
+}
+.footer #logo{
+	display:block;
+	width:95%;
+}
+.footer #logo_image{
+	width:5%;
+	padding:3%;
+	margin-bottom:5%;
+	border-bottom:3px solid gold;
+}
+.footer span{
+	display:block;
+	margin:2%;
+	color:#aaaaaa;
+}
+#company_name{
+	background: #222222;
+	padding:5%;
+	color:#cccccc;
 }
