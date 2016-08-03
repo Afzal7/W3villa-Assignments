@@ -2,7 +2,7 @@ var app = angular.module('myApp',['ngRoute']);
 
 app.controller('myCtrl',function($rootScope, $scope){
 	$scope.show_compose = false;
-	$scope.show_delete = false;
+	$rootScope.show_delete = false;
 
 	$scope.mail_data = JSON.parse(data);
 
@@ -10,8 +10,6 @@ app.controller('myCtrl',function($rootScope, $scope){
 
 	$scope.new_name = $scope.new_subject = $scope.new_message = '';
 	$scope.mail = '';
-
-	selected_mail_index = '';
 
 	$scope.open_mail = function(index){
 		$scope.mail = $rootScope.mail_list[index];
@@ -21,16 +19,22 @@ app.controller('myCtrl',function($rootScope, $scope){
 		$scope.mail = '';	
 	};
 
-	$scope.select_mail = function(index, $event){
+	$rootScope.selected_mail = [];
+	$scope.select_mail = function(index,value,$event){
 		$event.stopPropagation();
-		
-		$scope.show_delete = !$scope.show_delete;
-
-		if (!$scope.show_delete){
-			selected_mail_index = index;
+		if (value)
+		{
+			$rootScope.selected_mail.push($rootScope.mail_list[index]);
 		}
 		else{
-			selected_mail_index = '';
+			$rootScope.selected_mail.splice($rootScope.selected_mail.indexOf($rootScope.mail_list[index]),1);
+		}
+		if ($rootScope.selected_mail.length != 0)
+		{
+			$rootScope.show_delete = true;
+		}
+		else{
+			$rootScope.show_delete = false;
 		}
 	};
 
@@ -49,19 +53,12 @@ app.controller('myCtrl',function($rootScope, $scope){
 	};
 
 	$scope.delete = function(){
-		/*if (selected_mail_index>-1){
-			$rootScope.mail_list.splice(selected_mail_index,1);
-			selected_mail_index = '';
-			$scope.show_delete = false;	
-		}*/
-		var a = [];
-		angular.forEach($rootScope.mail_list, function(mail){
-			if ($rootScope.isChecked(mail))
-			{
-				a.push(mail);
-			}
-		});
-		console.log(a);
+		for (i=0;i<$rootScope.selected_mail.length;i++)
+		{
+			$rootScope.mail_list.splice($rootScope.mail_list.indexOf($rootScope.selected_mail[i]),1);
+		}
+		$rootScope.selected_mail = [];
+		$rootScope.show_delete = false;	
 	};
 });
 
@@ -94,6 +91,6 @@ app.config(function($routeProvider){
 app.controller("select_mail_list",function($rootScope,$scope,$route){
 	index = $scope.menu_options.indexOf($route.current.originalPath.substr(1));
 	$rootScope.mail_list = $scope.mail_data[$scope.menu_options[index]];
-	selected_mail_index = '';
-	$scope.show_delete = false;	
+	$rootScope.selected_mail = [];
+	$rootScope.show_delete = false;	
 });

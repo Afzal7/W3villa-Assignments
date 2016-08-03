@@ -46,8 +46,9 @@ body{
 	background: rgba(255,255,255,0.3);
 	transition : 300ms;
 }
-#no_mails:hover{
-
+#no_mails{
+	width:100%;
+	text-align:center;
 }
 .sender{
 	display:inline-block;
