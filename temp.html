@@ -3,25 +3,58 @@
 <head>
 	<title>Temp</title>
 	<script src='angular.js'></script>
+	<script src='angular-route.js'></script>
+	<script src='angular-animate.js'></script>
+	<script src='app.js'></script>
 </head>
-<script>
-	var app = angular.module('myApp',[]);
-	app.controller('myCtrl',function($scope){
-		$scope.name = 'Dexter';
-	});
-	app.directive('w3TestDirective',function(){
-		return {
-			template : "Testing Directive..."
-		};
-	});
-</script>
+<style>
+input{
+	padding:10px 15px;
+	border:1px solid grey;
+	margin:10px;
+	border-radius:3px;
+}
+input.ng-invalid{
+	background: red;
+	color:white;
+}
+input.n-valid{
+	background: green;
+	color:white;
+}
+</style>
 <body>
-	<div ng-app='myApp' ng-controller='myCtrl' w3-test-directive>
-		Name : <input type='text' ng-model='name'>
-		<p>Hello <span ng-bind='name'></span></p>
-		<p>{{name}}</p>
-		<p>Expression: {{100+100}}</p>
+	<div ng-app='myApp' ng-controller='myCtrl'>
 
+		<ul ng-repeat='item in http_response | limitTo : limit'>
+			<li>
+				{{item.Name + ' ' + item.City + ' ' + item.Country}}
+			</li>
+		</ul>
+		<button ng-show='limit < data_length' ng-click='show_more()'>Show More</button>
+		<p>
+			<a href="#">Home</a>
+			<a href="#1">1.html</a>
+			<a href="#2">2.html</a>
+		</p>
+
+		<div ng-view></div>
+		<button ng-click='clear_view()'>{{ form_button }}</button>
+		<form ng-show='show_view' name='myForm'>
+			<input type='text' ng-model='myName' name ='myName' placeholder="Name">
+			<span ng-show='myForm.myName.$invalid && myForm.myName.$touched'> Invalid Input</span>
+			<span ng-show="!myName">*</span><br>
+
+			<input type='email' ng-model='email' name = 'email' placeholder="Email">
+			<span ng-show='myForm.email.$invalid'> Invalid Input</span><br>
+
+			<input type='password' ng-model='password' name='password' placeholder="Password">
+			<input type='password' ng-model='retype_password' name='retype_password' placeholder="Retype Password">
+			<span ng-show='password != retype_password && myForm.password.$touched && myForm.retype_password.$dirty'> Password Mismatch </span><br>
+
+			<input type='submit' ng-disabled='myForm.$invalid || password != retype_password' value='submit'>
+		</form>
+		<div w3-test-directive></div>
 	</div>
 </body>
 </html>

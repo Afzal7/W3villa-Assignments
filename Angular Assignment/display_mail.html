@@ -1,0 +1,10 @@
+			
+
+			<div class='mails' ng-click='open_mail($index)' ng-repeat='item in mail_list'>
+				<input type='checkbox' ng-click='select_mail($index, $event)' ng-checked = 'item'>
+				<span class='sender'>{{ item.sender }}</span>
+				<span class='subject'>{{ item.subject }}</span>
+			</div>
+			<div id='no_mails'>
+				<span ng-hide='mail_list.length'> No Messages.</span>
+			</div>
