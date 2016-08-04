@@ -1,14 +1,10 @@
-data = '{\
-	"Inbox":[\
-		{"subject":"hi","text":"Hi how are you","sender":"Barry"},\
-		{"subject":"hello","text":"qwertyuiop qwertyuiop","sender":"Allen"}\
-	],\
-	"Sent":[\
-		{"subject":"hey","text":"Hi how are you","sender":"Bruce"},\
-		{"subject":"howdy","text":"qwertyuiop qwertyuiop","sender":"Arthur"}\
-	],\
-	"Spam":[\
-		{"subject":"spam hi","text":"adasdasdasd asd asd asd asd asd as du","sender":"spammer"},\
-		{"subject":"spam yo","text":"qwertyuiop qwertyuiop","sender":"spammer 2"}\
-	]\
-}';
+data = {
+	Mails:[
+		{subject:"hi",text:"Hi how are you",sender:"Barry",reciever:"Bruce",tags:[]},
+		{subject:"hello",text:"qwertyuiop qwertyuiop",sender:"Barry",reciever:"Bruce",tags:[]},
+		{subject:"hey",text:"Hi how are you",sender:"Bruce",reciever:"Barry",tags:[]},
+		{subject:"howdy",text:"qwertyuiop qwertyuiop",sender:"Bruce",reciever:"Barry",tags:[]},
+		{subject:"spam hi",text:"adasdasdasd asd asd asd asd asd as du",sender:"spammer",reciever:"Bruce",tags:["spam"]},
+		{subject:"spam yo",text:"qwertyuiop qwertyuiop",sender:"spammer 2",reciever:"Bruce",tags:["spam"]}
+	]
+};

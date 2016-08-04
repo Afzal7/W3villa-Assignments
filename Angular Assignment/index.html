@@ -6,28 +6,24 @@
 	<script src='angular.js'></script>
 	<script src='angular-route.js'></script>
 	<script src='angular-animate.js'></script>
+	<script src='ui-bootstrap.js'></script>
+	<link href="bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src='app.js'></script>
 	<script src='data.json'></script>
 </head>
 <body>
 	<div id='main' ng-app='myApp' ng-controller='myCtrl'>
 		<div class='top_panel'>
-			<span class='top_panel_options' ng-click='show_compose_mail()'>COMPOSE</span>
+			<span class='top_panel_options' ng-click='open_compose_mail()'>COMPOSE</span>
 			<span class='top_panel_options' ng-show='show_delete' ng-click='delete()'>DELETE</span>
 		</div>
 		<div class='left_container'>
 			<div class='menu_options' ng-repeat='option in menu_options'>
-				<a href='#{{ option }}'>{{ option }}</a>
+				<a href='#{{ option.name }}'>{{ option.name }}</a>
 			</div>
 		</div>
 		<div class='right_container' ng-view></div>
-		<div class="modal" ng-show='mail'>
-			<span id='close' ng-click='close_mail()'>X</span>
-			<span id='mail_sender'>Name : {{mail.sender}}</span>
-			<span id='mail_subject'>Subject : {{mail.subject}}</span>
-			<span id='mail_text'>Message : {{mail.text}}</span>
-		</div>
-		<div id='compose_mail_modal' class="modal" ng-show='show_compose'>
+		<div id='compose_mail_modal' class="my_modal" ng-show='show_compose'>
 			<input type="text" name ='new_name' ng-model='new_name' placeholder="To">
 			<input type="text" name ='new_subject' ng-model='new_subject' placeholder="Subject">
 			<textarea type="text" name ='new_message' ng-model='new_message' placeholder="Message"> </textarea>

@@ -9,7 +9,7 @@ body{
 	background: rgba(255,255,255,0.5);
 	padding:2% 1%;
 	overflow: auto;
-	box-shadow:0px 0px 20px rgba(0,0,0,.5);
+	box-shadow:0px 0px 20px rgba(0,0,0,.3);
 }
 .top_panel{
 	padding:1% 0;
@@ -66,7 +66,7 @@ body{
 	display:inline-block;
 	width:100%;
 }
-.modal{
+.my_modal{
 	background:rgba(255,255,255,.9);
 	position:absolute;
 	width:40%;
@@ -77,11 +77,11 @@ body{
 	left:0;
 	right:0;
 }
-.modal span, #compose_mail_modal input, #compose_mail_modal textarea{
+.my_modal span, #compose_mail_modal input, #compose_mail_modal textarea, .new_mail_input{
 	display:block;
 	padding:10px 20px;
 }
-.modal #close{
+.my_modal #close{
 	float:right;
 	margin:-4%;
 	cursor:pointer;
@@ -89,27 +89,36 @@ body{
 	color:grey;
 	font-weight: bold;
 }
-.modal #close:hover{
+.my_modal #close:hover{
 	color:black;
 }
-#compose_mail_modal{
+#mail_info_table{
+	margin:3% 0;
+	width:100%;
+}
+#mail_info_table th{
+	padding:10px;
+	max-width:50px;
+}
+#compose_mail_my_modal{
 	width:60%;
 	padding:5%;
 }
-#compose_mail_modal input, #compose_mail_modal textarea{
+#compose_mail_modal input, #compose_mail_modal textarea,.new_mail_input{
 	background: transparent;
-	width:50%;
-	margin:0 0 3% 0; 
+	width:80%;
+	margin:0 0 3% 5%; 
 	border:0;
 	border-bottom:2px solid #999999;
 	font-size:15px;
 }
-#compose_mail_modal textarea{
-	min-height:100px;
+#compose_mail_modal textarea, #new_message{
+	min-height:150px;
 }
-#compose_mail_modal input:focus, #compose_mail_modal textarea:focus{
+#compose_mail_modal input:focus, #compose_mail_modal textarea:focus, .new_mail_input:focus{
 	outline: none;
-	border-bottom:3px solid rgba(0,100,200,0.9);
+	border-bottom:2px solid rgba(0,100,200,0.9);
+	transition: 300ms;
 }
 .buttons_container{
 	position: absolute;

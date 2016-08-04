@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{mail.sender}}</h3>
+</div>
+<div class="modal-body">
+			<div class="table-responsive">
+				<table id='mail_info_table'>
+					<tbody>
+						<tr>
+							<th>To :</th>
+							<td>{{mail.reciever}}</td>
+						</tr>
+						<tr>
+							<th>Subject :</th>
+							<td>{{mail.subject}}</td>
+						</tr>
+						<tr>
+							<th>Message :</th>
+							<td>{{mail.text}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+</div>
+<div class="modal-footer">
+	<span id='send' ng-click = "close_modal()">Ok</span>
+</div>
