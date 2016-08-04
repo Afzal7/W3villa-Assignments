@@ -121,7 +121,7 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 		});
 	};
 	$scope.open_mail_content = function(index){
-		$uibModal.open({
+		uibModalInstance = $uibModal.open({
 			animation : true,
 			templateUrl : 'mail_content.html',
 			controller : 'mail_content_controller',
@@ -195,6 +195,14 @@ app.controller('modalCtrl',function($scope,$rootScope,$uibModalInstance){
 
 app.controller('mail_content_controller',function($scope,$rootScope,index, $uibModalInstance){
 	$scope.mail = $rootScope.mail_list[index];
+
+	$scope.report_spam = function(){
+		$rootScope.mail_list[index].tags.push('spam');
+	};
+
+	$scope.remove_spam = function(){
+		$rootScope.mail_list[index].tags.splice($rootScope.mail_list[index].tags.indexOf('spam'),1);
+	};
 
 	$scope.close_modal =function(){
 		$uibModalInstance.close();

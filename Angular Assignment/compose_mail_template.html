@@ -1,12 +1,18 @@
-<div class="modal-header">
-    <h3 class="modal-title">Compose Mail</h3>
-</div>
-<div class="modal-body">
-	<input class="new_mail_input" type="text" name ='new_name' ng-model='new_name' placeholder="To">
-	<input class="new_mail_input" type="text" name ='new_subject' ng-model='new_subject' placeholder="Subject">
-	<textarea id='new_message' class="new_mail_input" type="text" name ='new_message' ng-model='new_message' placeholder="Message"> </textarea>
-</div>
-<div class="modal-footer">
-	<span id='send' ng-click="send_mail()">Send</span>
-	<span id='cancel' ng-click = "close_modal()">Cancel</span>
+<div class='modal_container'>
+	<div class="modal-header">
+	    <h3 class="modal-title">Compose Mail</h3>
+	</div>
+	<div class="modal-body">
+		<input class="new_mail_input" type="text" name ='new_name' ng-model='new_name' placeholder="To">
+		<input class="new_mail_input" type="text" name ='new_subject' ng-model='new_subject' placeholder="Subject">
+		<textarea id='new_message' class="new_mail_input" type="text" name ='new_message' ng-model='new_message' placeholder="Message"> </textarea>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" ng-click="send_mail()">
+			<span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send
+		</button>
+		<button type="button" class="mail_options btn btn-danger" ng-click = "close_modal()" ng-show='mail.tags.indexOf("spam") != -1'>
+	    	<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Cancel
+	    </button>
+	</div>
 </div>

@@ -1,5 +1,11 @@
 <div class="modal-header">
-    <h3 class="modal-title">{{mail.sender}}</h3>
+    <h3 class="mail_title modal-title">{{mail.sender}}</h3>
+    <button type="button" class="mail_options btn btn-danger" ng-click = 'report_spam()' ng-show='mail.tags.indexOf("spam") == -1'>
+    	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Spam
+    </button>
+    <button type="button" class="mail_options btn btn-info" ng-click = 'remove_spam()' ng-show='mail.tags.indexOf("spam") != -1'>
+    	<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Remove Spam
+    </button>
 </div>
 <div class="modal-body">
 			<div class="table-responsive">

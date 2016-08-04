@@ -16,10 +16,12 @@ body{
 	border-bottom:2px solid rgba(255,255,255,0.4);
 }
 .top_panel_options{
+	margin-right:5px;
 	padding:10px 25px;
 	background: rgba(255,255,255,0.5);
 	font-family:Arial;
 	font-size:15px;
+	display:inline-block;
 	cursor: pointer;
 }
 .top_panel_options:hover{
@@ -66,31 +68,9 @@ body{
 	display:inline-block;
 	width:100%;
 }
-.my_modal{
-	background:rgba(255,255,255,.9);
-	position:absolute;
-	width:40%;
-	min-height: 200px;
-	padding:2%;
-	margin:auto;
-	top:20%;
-	left:0;
-	right:0;
-}
-.my_modal span, #compose_mail_modal input, #compose_mail_modal textarea, .new_mail_input{
+.new_mail_input{
 	display:block;
 	padding:10px 20px;
-}
-.my_modal #close{
-	float:right;
-	margin:-4%;
-	cursor:pointer;
-	font-family:Arial;
-	color:grey;
-	font-weight: bold;
-}
-.my_modal #close:hover{
-	color:black;
 }
 #mail_info_table{
 	margin:3% 0;
@@ -104,18 +84,18 @@ body{
 	width:60%;
 	padding:5%;
 }
-#compose_mail_modal input, #compose_mail_modal textarea,.new_mail_input{
+ .new_mail_input{
 	background: transparent;
-	width:80%;
+	width:60%;
 	margin:0 0 3% 5%; 
 	border:0;
 	border-bottom:2px solid #999999;
 	font-size:15px;
 }
-#compose_mail_modal textarea, #new_message{
+ #new_message{
 	min-height:150px;
 }
-#compose_mail_modal input:focus, #compose_mail_modal textarea:focus, .new_mail_input:focus{
+  .new_mail_input:focus{
 	outline: none;
 	border-bottom:2px solid rgba(0,100,200,0.9);
 	transition: 300ms;
@@ -140,4 +120,17 @@ body{
 }
 #cancel{
 	background:rgba(255,0,0,0.9);
+}
+.mail_title{
+	display:inline;
+}
+.mail_options{
+	float:right;
+}
+#delete_button.ng-hide{
+	transform:scale(.1);
+	transition:100ms;
+}
+#delete_button.ng-hide-remove{
+	transition:100ms;
 }
