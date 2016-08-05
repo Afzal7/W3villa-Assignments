@@ -2,7 +2,6 @@ body{
 	margin:0;
 	background: -webkit-linear-gradient(to left, #00d2ff , #3a7bd5);
 	background: linear-gradient(to left, #00d2ff , #3a7bd5);
-        
 }
 #main{
 	margin:3%;
@@ -29,7 +28,7 @@ body{
 }
 .left_container{
 	padding:1% 1% 1% 0;
-	width:10%;
+	width:auto;
 	float:left;
 	border-right:2px solid rgba(255,255,255,0.5);
 }
@@ -73,12 +72,15 @@ body{
 	padding:10px 20px;
 }
 #mail_info_table{
-	margin:3% 0;
 	width:100%;
 }
 #mail_info_table th{
 	padding:10px;
 	max-width:50px;
+}
+.modal_body_top{
+	padding:5px;
+	text-align:right;
 }
 #compose_mail_my_modal{
 	width:60%;
@@ -99,6 +101,12 @@ body{
 	outline: none;
 	border-bottom:2px solid rgba(0,100,200,0.9);
 	transition: 300ms;
+}
+.labels_name .glyphicon-remove, .labels_name:hover .glyphicon-tag{
+	display: none;
+}
+.labels_name:hover .glyphicon-remove{
+	display: inline-block;
 }
 .buttons_container{
 	position: absolute;
@@ -125,7 +133,7 @@ body{
 	display:inline;
 }
 .mail_options{
-	float:right;
+	margin:0 5px;
 }
 #delete_button.ng-hide{
 	transform:scale(.1);
@@ -133,4 +141,7 @@ body{
 }
 #delete_button.ng-hide-remove{
 	transition:100ms;
+}
+.label_options{
+	cursor: pointer;
 }

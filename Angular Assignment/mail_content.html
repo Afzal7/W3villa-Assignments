@@ -1,13 +1,27 @@
 <div class="modal-header">
     <h3 class="mail_title modal-title">{{mail.sender}}</h3>
-    <button type="button" class="mail_options btn btn-danger" ng-click = 'report_spam()' ng-show='mail.tags.indexOf("spam") == -1'>
-    	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Spam
-    </button>
-    <button type="button" class="mail_options btn btn-info" ng-click = 'remove_spam()' ng-show='mail.tags.indexOf("spam") != -1'>
-    	<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Remove Spam
-    </button>
 </div>
 <div class="modal-body">
+	<div class="modal_body_top">
+		<button type="button" class="mail_options btn btn-danger" ng-click = 'report_spam()' ng-show='!mail.spam'>
+	    	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Spam
+	    </button>
+	    <button type="button" class="mail_options btn btn-info" ng-click = 'remove_spam()' ng-show='mail.spam'>
+	    	<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Remove Spam
+	    </button>
+	    <div class="btn-group mail_options" uib-dropdown is-open="status.isopen" style=''>
+		    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+			    {{ selected_label }} <span class="caret"></span>
+		    </button>
+		    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+		    	<li role="menuitem" ng-repeat='item in labels'><a class='label_options' ng-click='select_label(item.name)'>{{ item.name }}</a></li>
+		    </ul>
+		</div>
+		<span ng-repeat='tag in mail.tags' class="btn btn-default mail_options labels_name" ng-click='remove_label(tag)'>{{ tag }} 
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+			<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+		</span>
+	</div>
 			<div class="table-responsive">
 				<table id='mail_info_table'>
 					<tbody>

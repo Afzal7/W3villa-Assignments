@@ -1,10 +1,10 @@
 data = {
 	Mails:[
-		{subject:"hi",text:"Hi how are you",sender:"Barry",reciever:"Bruce",tags:[]},
-		{subject:"hello",text:"qwertyuiop qwertyuiop",sender:"Barry",reciever:"Bruce",tags:[]},
-		{subject:"hey",text:"Hi how are you",sender:"Bruce",reciever:"Barry",tags:[]},
-		{subject:"howdy",text:"qwertyuiop qwertyuiop",sender:"Bruce",reciever:"Barry",tags:[]},
-		{subject:"spam hi",text:"adasdasdasd asd asd asd asd asd as du",sender:"spammer",reciever:"Bruce",tags:["spam"]},
-		{subject:"spam yo",text:"qwertyuiop qwertyuiop",sender:"spammer 2",reciever:"Bruce",tags:["spam"]}
+		{subject:"hi",text:"Hi how are you",sender:"Barry",reciever:"Bruce",spam:false, tags:[]},
+		{subject:"hello",text:"qwertyuiop qwertyuiop",sender:"Barry",reciever:"Bruce",spam:false, tags:[]},
+		{subject:"hey",text:"Hi how are you",sender:"Bruce",reciever:"Barry",spam:false, tags:[]},
+		{subject:"howdy",text:"qwertyuiop qwertyuiop",sender:"Bruce",reciever:"Barry",spam:false, tags:[]},
+		{subject:"spam hi",text:"adasdasdasd asd asd asd asd asd as du",sender:"spammer",reciever:"Bruce",spam:true, tags:[]},
+		{subject:"spam yo",text:"qwertyuiop qwertyuiop",sender:"spammer 2",reciever:"Bruce",spam:true ,tags:[]}
 	]
 };

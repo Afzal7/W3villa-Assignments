@@ -22,7 +22,7 @@
 			</span>
 		</div>
 		<div class='left_container'>
-			<div class='menu_options' ng-repeat='option in menu_options'>
+			<div class='menu_options' ng-repeat='option in menu_options.concat(labels)' ng-if='option.name != "None"'>
 				<a href='#{{ option.name }}'>{{ option.name }}</a>
 			</div>
 		</div>

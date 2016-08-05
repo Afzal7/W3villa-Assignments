@@ -11,7 +11,8 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 	$scope.mail_list_type = '';
 
 
-	$scope.menu_options = [{id:0,name:"Inbox"} , {id:1,name:"Sent"} , {id:2,name:"Spam"} , {id:3,name:"Label"}];
+	$scope.menu_options = [{id:0,name:"Inbox"} , {id:1,name:"Sent"} , {id:2,name:"Spam"}];
+	$scope.labels = [{id:0,name:"None"}, {id:1,name:"Friends"} , {id:2,name:"Family"} , {id:3,name:"Co Workers"}];
 
 	$scope.new_name = $scope.new_subject = $scope.new_message = '';
 	$scope.mail = '';
@@ -19,14 +20,18 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 	$scope.get_mails = function(mail_type){
 		if (mail_type == 'Inbox'){
 			$scope.filtered_mail_data = $scope.filterMails($scope.mail_data,'reciever');
-			$scope.filtered_mail_data = $scope.tagsFilter($scope.filtered_mail_data,'spam',true);
+			$scope.filtered_mail_data = $scope.spamFilter($scope.filtered_mail_data, true);
 		}
 		else if (mail_type == 'Sent'){
 			$scope.filtered_mail_data =  $scope.filterMails($scope.mail_data,'sender');
 		}
 		else if (mail_type == 'Spam'){
 			$scope.filtered_mail_data = $scope.filterMails($scope.mail_data,'reciever');
-			$scope.filtered_mail_data = $scope.tagsFilter($scope.filtered_mail_data,'spam',false);
+			$scope.filtered_mail_data = $scope.spamFilter($scope.filtered_mail_data,false);
+		}
+		else{
+			$scope.filtered_mail_data = $scope.filterMails($scope.mail_data,'reciever');
+			$scope.filtered_mail_data = $scope.tagsFilter($scope.filtered_mail_data,mail_type,false);
 		}
 		$scope.mail_list = $scope.filtered_mail_data;
 		return $scope.filtered_mail_data;
@@ -39,6 +44,22 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
         	if (item[type] != $scope.user)
         	{
         		flag = false;
+        	}
+        	if (flag)
+        	{
+        		new_arr.push(item);
+        	}
+        });
+        return new_arr;
+	};
+
+	$scope.spamFilter = function(arr,flag_value){
+		new_arr = [];
+		angular.forEach(arr, function (item,i) {
+        	flag = flag_value;
+        	if (item['spam'])
+        	{
+        		flag = !flag;
         	}
         	if (flag)
         	{
@@ -92,7 +113,7 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 	});
 
 	$scope.send_mail = function(mail_data){
-		new_mail = {subject:mail_data[1], text:mail_data[2], sender:$scope.user, reciever:mail_data[0], tags:[]};
+		new_mail = {subject:mail_data[1], text:mail_data[2], sender:$scope.user, reciever:mail_data[0], spam:false, tags:[]};
 		$scope.mail_data.push(new_mail);
 
 		$scope.display_message("Message Sent Successfully.");
@@ -112,6 +133,19 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 		$rootScope.show_delete = false;
 		$scope.display_message("Message Deleted Successfully.");
 	};
+
+	$rootScope.$on('Add_label',function(event, mail, label){
+		if (label != 'None'){
+			$scope.mail_data[$scope.mail_data.indexOf(mail)].tags.push(label);
+			$scope.display_message("Message Added to "+label);
+		}
+	});
+
+	$rootScope.$on('Remove_label',function(event, mail, label){
+		$scope.mail_data[$scope.mail_data.indexOf(mail)].tags.splice($scope.mail_data[$scope.mail_data.indexOf(mail)].tags.indexOf(label),1);
+		$scope.display_message("Message Remove from "+label);
+	});
+
 	$scope.open_compose_mail = function(){
 		$uibModal.open({
 			animation : true,
@@ -126,7 +160,8 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 			templateUrl : 'mail_content.html',
 			controller : 'mail_content_controller',
 			resolve: {
-				index : index
+				index : index,
+				labels : function(){return $scope.labels;}
 			}
 		});
 	};
@@ -160,7 +195,8 @@ app.config(function($routeProvider){
 		controller : "show_spam"
 	})
 	.otherwise({
-		templateUrl : "/error.html"
+		templateUrl : "display_mail.html",
+		controller : "show_labels"
 	});
 });
 app.controller("show_inbox",function($rootScope,$scope,$route){
@@ -173,6 +209,10 @@ app.controller("show_sent",function($rootScope,$scope,$route){
 
 app.controller("show_spam",function($rootScope,$scope,$route){
 	$rootScope.mail_list = $scope.get_mails('Spam');
+});
+
+app.controller("show_labels",function($rootScope,$scope,$route, $location){
+	$rootScope.mail_list = $scope.get_mails($location.path().substr(1));
 });
 
 app.controller("select_mail_list",function($rootScope,$scope,$route){
@@ -193,15 +233,26 @@ app.controller('modalCtrl',function($scope,$rootScope,$uibModalInstance){
 	}
 });
 
-app.controller('mail_content_controller',function($scope,$rootScope,index, $uibModalInstance){
+app.controller('mail_content_controller',function($scope,$rootScope,index,labels, $uibModalInstance){
 	$scope.mail = $rootScope.mail_list[index];
+	$scope.labels = labels;
+	$scope.selected_label = 'Label';
 
 	$scope.report_spam = function(){
-		$rootScope.mail_list[index].tags.push('spam');
+		$rootScope.mail_list[index].spam = true;
 	};
 
 	$scope.remove_spam = function(){
-		$rootScope.mail_list[index].tags.splice($rootScope.mail_list[index].tags.indexOf('spam'),1);
+		$rootScope.mail_list[index].spam = false;
+	};
+
+	$scope.select_label = function(label){
+		$scope.selected_label = label;
+		$rootScope.$emit("Add_label", $scope.mail, $scope.selected_label);
+	};
+
+	$scope.remove_label = function(label){
+		$rootScope.$emit("Remove_label", $scope.mail, label);
 	};
 
 	$scope.close_modal =function(){
