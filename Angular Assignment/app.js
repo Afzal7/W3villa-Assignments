@@ -1,6 +1,6 @@
 var app = angular.module('myApp',['ngRoute','ngAnimate','ui.bootstrap']);
 
-app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
+app.controller('myCtrl',function($rootScope, $scope, $uibModal, $filter, $route){
 	$scope.user = 'Bruce';
 
 	$scope.show_compose = false;
@@ -164,6 +164,13 @@ app.controller('myCtrl',function($rootScope, $scope, $uibModal,$filter){
 				labels : function(){return $scope.labels;}
 			}
 		});
+
+		uibModalInstance.result.then(function(){
+			$route.reload();
+		},
+		function(){
+			$route.reload();
+		});
 	};
 	$scope.display_message = function(message){
 		$uibModal.open({
@@ -222,18 +229,21 @@ app.controller("select_mail_list",function($rootScope,$scope,$route){
 	$rootScope.show_delete = false;	
 });
 
-app.controller('modalCtrl',function($scope,$rootScope,$uibModalInstance){
+app.controller('modalCtrl',function($scope, $rootScope, $uibModalInstance, $location, $route){
 	$scope.send_mail = function(){
 		mail_data = [$scope.new_name, $scope.new_subject, $scope.new_message];
 		$rootScope.$emit("send_the_mail",mail_data);
 		$scope.close_modal()
+		if ($location.path() == '/Sent') {
+			$route.reload();
+		}
 	}
 	$scope.close_modal = function(){
 		$uibModalInstance.close();
 	}
 });
 
-app.controller('mail_content_controller',function($scope,$rootScope,index,labels, $uibModalInstance){
+app.controller('mail_content_controller',function($scope,$rootScope,index,labels, $uibModalInstance,$route){
 	$scope.mail = $rootScope.mail_list[index];
 	$scope.labels = labels;
 	$scope.selected_label = 'Label';

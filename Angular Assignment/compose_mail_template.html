@@ -3,12 +3,14 @@
 	    <h3 class="modal-title">Compose Mail</h3>
 	</div>
 	<div class="modal-body">
-		<input class="new_mail_input" type="text" name ='new_name' ng-model='new_name' placeholder="To">
-		<input class="new_mail_input" type="text" name ='new_subject' ng-model='new_subject' placeholder="Subject">
-		<textarea id='new_message' class="new_mail_input" type="text" name ='new_message' ng-model='new_message' placeholder="Message"> </textarea>
+		<form name='myForm'>
+			<input class="new_mail_input" type="text" name ='new_name' ng-model='new_name' placeholder="To" required>
+			<input class="new_mail_input" type="text" name ='new_subject' ng-model='new_subject' placeholder="Subject" >
+			<textarea id='new_message' class="new_mail_input" type="text" name ='new_message' ng-model='new_message' placeholder="Message" required> </textarea>
+		</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-primary" ng-click="send_mail()">
+		<button type="submit" class="btn btn-primary" ng-click="send_mail()" ng-disabled='myForm.$invalid'>
 			<span class="glyphicon glyphicon-send" aria-hidden="true"></span> Send
 		</button>
 		<button type="button" class="mail_options btn btn-danger" ng-click = "close_modal()" ng-show='mail.tags.indexOf("spam") != -1'>

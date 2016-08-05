@@ -1,7 +1,8 @@
 			<div class='mails' ng-click='open_mail_content($index)' ng-repeat='item in mail_list'>
 				<input type='checkbox' ng-model="value" ng-click="select_mail($index,value,$event)">
 				<span class='sender'>{{ item.sender }}</span>
-				<span class='subject'>{{ item.subject }}</span>
+				<span class='subject'>{{ item.subject }} - </span>
+				<span class='text'>{{ item.text | limitTo: 20 }}...</span>
 			</div>
 			<div id='no_mails'>
 				<span ng-hide='mail_list.length'> No Messages.</span>
